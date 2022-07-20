@@ -38,7 +38,7 @@ public class AddressBookMain {
         //Method to edit the details
         public void editDetails(String firstName) {
                 // for each loop
-                for (Contacts contact : contactDetails) {
+                for (Contacts contact : contactsDetails) {
                         String name = contact.getFirstName();// "name" variable and store the first name that you want to edit.
                         // if the first name matches with the entered name, using equals method
                         if (name.equals(firstName)) {
@@ -108,6 +108,7 @@ public class AddressBookMain {
         }
         public static void main(String[] args) {
                 System.out.println("Welcome to the Address book System project......:-)");
+                Scanner sc = new Scanner(System.in);
                 AddressBookMain person1 = new AddressBookMain();
                 person1.addPersonDetails();
                 person1.displayContacts();
