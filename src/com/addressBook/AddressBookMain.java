@@ -1,6 +1,7 @@
 package com.addressBook;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -36,12 +37,15 @@ public class AddressBookMain {
         }
 
         //Method to edit the details
-        public void editDetails(String firstName) {
+        public void editDetails() {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Enter the first name you want to edit ");
+                String fName = sc.next();
                 // for each loop
                 for (Contacts contact : contactsDetails) {
                         String name = contact.getFirstName();// "name" variable and store the first name that you want to edit.
                         // if the first name matches with the entered name, using equals method
-                        if (name.equals(firstName)) {
+                        if (name.equals(fName)) {
                                 System.out.println("Enter the number to edit respective info: ");
                                 System.out.println("1. First Name \n2. Last Name \n3. Address \n4. City \n5. State \n6. Zip Code \n7. Contact Number \n8. Email Address");
                                 System.out.println("Enter value to update: ");
@@ -106,14 +110,58 @@ public class AddressBookMain {
         public void displayContacts(){
                 System.out.println(contactsDetails);
         }
-        public static void main(String[] args) {
-                System.out.println("Welcome to the Address book System project......:-)");
+        // for delete
+        public void deleteContact() {
                 Scanner sc = new Scanner(System.in);
-                AddressBookMain person1 = new AddressBookMain();
-                person1.addPersonDetails();
-                person1.displayContacts();
-                System.out.println("Enter First Name for which you want to Edit info: ");
-                String edit = sc.next();
-                person1.editDetails(edit); //calling editDetails method
+                System.out.println("Enter the first name of the person to be deleted");
+                String firstName = sc.next();
+                Iterator<Contacts> iterator = contactsDetails.listIterator();
+                while (iterator.hasNext()) {
+
+                        Contacts info = iterator.next();
+
+                        if (firstName.equals(info.getFirstName())) {
+                                contactsDetails.remove(info);
+                                System.out.printf("%s Contact removed", firstName + "\n");
+                        } else
+                                System.out.println("Contact not found\n");
+                }
+        }
+        public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Welcome to Address Book Program!)"); //Welcome Message
+                AddressBookMain addressDetails = new AddressBookMain();
+                int chooseNumber;
+                //do while loop
+                do {
+                        System.out.println("Enter the number to perform an action: ");
+                        System.out.println("1. Add Details \n2. Edit Details \n3. Delete Details \n4. Display Details \n5. exit ");
+                        chooseNumber = sc.nextInt();
+
+                        switch (chooseNumber) {
+                                case 1:
+                                        System.out.println("Add Details: ");
+                                        addressDetails.addPersonDetails();
+                                        break;
+                                case 2:
+                                        System.out.println("Edit details: ");
+                                        addressDetails.editDetails();
+                                        break;
+                                case 3:
+                                        System.out.println("Delete Details: ");
+                                        addressDetails.deleteContact();
+                                        break;
+                                case 4:
+                                        System.out.println("Display details: ");
+                                        addressDetails.displayContacts();
+                                        break;
+                                case 5:
+                                        System.out.println("Exit");
+                                        break;
+                                default:
+                                        System.out.println("invalid Option, Please select (1 to 5): ");
+                                        break;
+                        }
+                } while (chooseNumber != 5);
         }
 }
