@@ -1,25 +1,46 @@
 package com.addressBook;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class AddressBookMain {
-    public static void main(String[] args) {
-            System.out.println("--------Welcome to Address Book Program---------");
-            //Creating object
-            Contacts contacts = new Contacts();
-            contacts.setFirstName("Robins");
-            System.out.println("First Name: "+contacts.getFirstName());
-            contacts.setLastName("chandna");
-            System.out.println("Last Name: "+contacts.getLastName());
-            contacts.setAddress("vijay nagar");
-            System.out.println("Address: "+contacts.getAddress());
-            contacts.setCity("Ghaziabad");
-            System.out.println("City: "+contacts.getCity());
-            contacts.setState("uttarPradesh");
-            System.out.println("State: "+contacts.getState());
-            contacts.setZipCode("201009");
-            System.out.println("Pin Code: "+contacts.getZipCode());
-            contacts.setContactNumber("1234567890");
-            System.out.println("Contact Number: "+contacts.getContactNumber());
-            contacts.setEmailAddress("robindhaka26@gmail.com");
-            System.out.println("Email Address: "+contacts.getEmailAddress());
+        ArrayList<Contacts> contactsDetails = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        public void addPersonDetails(){
+                Contacts info = new Contacts();
+                System.out.print("Enter your First Name: ");
+                info.setFirstName(sc.nextLine());
+
+                System.out.print("Enter Last Name: ");
+                info.setLastName(sc.nextLine());
+
+                System.out.print("Enter Your Address: ");
+                info.setAddress(sc.nextLine());
+
+                System.out.print("Enter your city: ");
+                info.setCity(sc.nextLine());
+
+                System.out.print("Enter your State: ");
+                info.setState(sc.nextLine());
+
+                System.out.print("Enter your zip Code: ");
+                info.setZipCode(sc.nextLine());
+
+                System.out.print("Enter your Contact Number: ");
+                info.setContactNumber(sc.nextLine());
+
+                System.out.print("Enter your Email Address: ");
+                info.setEmailAddress(sc.nextLine());
+
+                contactsDetails.add(info);
+        }
+        public void displayContacts(){
+                System.out.println(contactsDetails);
+        }
+        public static void main(String[] args) {
+                System.out.println("Welcome to the Address book System project......:-)");
+                AddressBookMain person1 = new AddressBookMain();
+                person1.addPersonDetails();
+                person1.displayContacts();
         }
 }
