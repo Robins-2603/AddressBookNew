@@ -107,24 +107,36 @@ public class AddressBookMain {
                         }
                 }
         }
+        //method to display array list
         public void displayContacts(){
-                System.out.println(contactsDetails);
+                for (Contacts contactsDetailsInfo : contactsDetails) {
+                        System.out.println("----------------------------------------");
+                        System.out.println(contactsDetailsInfo);
+                        System.out.println("----------------------------------------");
+                }
         }
         // for delete
         public void deleteContact() {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Enter the first name of the person to be deleted");
                 String firstName = sc.next();
-                Iterator<Contacts> iterator = contactsDetails.listIterator();
-                while (iterator.hasNext()) {
+                Iterator<Contacts> removeContact = contactsDetails.iterator();
+                /*  Checking the next element where
+                 *   condition holds true till there is single element
+                 *   in the List using hasNext() method
+                 */
+                while (removeContact.hasNext()) {
 
-                        Contacts info = iterator.next();
-
-                        if (firstName.equals(info.getFirstName())) {
-                                contactsDetails.remove(info);
-                                System.out.printf("%s Contact removed", firstName + "\n");
-                        } else
-                                System.out.println("Contact not found\n");
+                        /*  Move cursor to next element */
+                        Contacts nextElement = removeContact.next(); //object for Contacts class
+                        if (nextElement.getFirstName().equals(firstName) ) {
+                                removeContact.remove();
+                                System.out.println("Contact is removed!");
+                                break;
+                        }
+                        else {
+                                System.out.println("Contact not found.");
+                        }
                 }
         }
         public static void main(String[] args) {
